@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ParkeringService.Datastore;
 using ParkeringService.Models;
@@ -32,6 +33,28 @@ namespace ParkeringService.Controllers
             return parkingStore.GetParkingList(numberplate);
         }
 
-        //[HttpPost]
+        [HttpPost]
+        public async Task<ActionResult<Parking>> PostParking(string numberplate, string email, int phonenumber, string location)
+        {
+            Parking parking = new Parking()
+            {
+                Numberplate = numberplate,
+                Email = email,
+                Phone = phonenumber,
+                Location = location,
+            };
+
+            parkingStore.Save(parking);
+
+            return Ok(parking);
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteParking(string numberplate)
+        {
+            parkingStore.Delete(numberplate);
+
+            return Ok($"Parkings with {numberplate} deleted");
+        }
     }
 }
