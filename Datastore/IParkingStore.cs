@@ -6,5 +6,6 @@ namespace ParkeringService.Datastore
     {
         Parking GetParkingList(string numberplate);
         void Save(Parking parking);
+        void Delete(string numberplate);
     }
 }

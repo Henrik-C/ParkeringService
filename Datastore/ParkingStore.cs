@@ -17,5 +17,10 @@ namespace ParkeringService.Datastore
         {
             ListDatabase.Add(parking);
         }
+
+        public void Delete(string numberplate)
+        {
+            ListDatabase.RemoveAll(x => x.Numberplate == numberplate);
+        }
     }
 }
